@@ -5,7 +5,9 @@ class LikesController < ApplicationController
   def create
     @like = @note.likes.build
     @like.user = current_user
+    @user = @like.user
     if @like.save
+      #UserMailer.like_notification(@user).deliver_now
       redirect_to note_path(@note)
     end
   end

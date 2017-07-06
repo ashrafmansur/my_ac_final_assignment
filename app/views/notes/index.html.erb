@@ -1,11 +1,26 @@
+<div class="container">
 
-<% if user_signed_in? %>
-<%= link_to "New Note", new_note_path %>
-<% end %>
-<%= link_to "Find more users to follow!", users_path %>
+  <div class="row">
+    <div class="col-md-10">
+      <% if user_signed_in? %>
+      <button type="button" class="btn btn-default"><%= link_to "New Note", new_note_path %></button>
+      <% end %>
+      <button type="button" class="btn btn-default"><%= link_to "Find more users to follow!", users_path %></button>
+    </div>
+  </div>
 
-<% @notes.each do |note| %>
-<h2><%= link_to "#{note.body}", note_path(note) %></h2>
-<h3><%= link_to "#{note.user.username}", user_path(note.user) %></h3>
+  <hr>
+  <div class="row">
+    <div class="col-md-10">
+      <% @notes.each do |note| %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2><%= link_to "#{note.body}", note_path(note) %></h2>
+          <p><%= link_to "By #{note.user.username}", user_path(note.user) %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
 
-<% end %>
+</div>

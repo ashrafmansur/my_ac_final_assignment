@@ -1,3 +1,7 @@
-<% @notes.each do |note| %>
-<h3><%= link_to "#{note.body}", note_path(note) %></h3>
-<% end %>
+<ul class="list-group">
+  <% @notes.each do |note| %>
+  <li class="list-group-item">
+    <h3><%= link_to "#{note.body}", note_path(note) %></h3>
+  </li>
+  <% end %>
+</ul>

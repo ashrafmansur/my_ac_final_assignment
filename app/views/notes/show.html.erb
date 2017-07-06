@@ -1,15 +1,30 @@
-<h2><%= @note.body %></h2>
-<%= @note.user.username %>
-<p><%= @likes.count %> Likes</p>
+<div class="container">
+  <div class="row">
 
+    <h2><%= @note.body %></h2>
+    <hr>
+    <p>By <%= @note.user.username %></p>
+    <p><%= @likes.count %> Likes</p>
 
-<% if @currentlikers.include?(current_user.id) %>
-<%= link_to "Unlike this", like_path(id: @note), method: :delete %>
-<% else %>
-<%= link_to "Like this", likes_path(id: @note), method: :post %>
-<% end %>
+    <hr>
+    <% if @currentlikers.include?(current_user.id) %>
+      <button type="button" class="btn btn-default">
+        <%= link_to "Unlike this", like_path(id: @note), method: :delete %>
+      </button>
+    <% else %>
+      <button type="button" class="btn btn-default">
+        <%= link_to "Like this", likes_path(id: @note), method: :post %>
+      </button>
+    <% end %>
 
-<% if current_user == @note.user %>
-<%= link_to "Edit this note", edit_note_path(@note) %>
-<%= link_to "Delete this note", note_path(@note), method: :delete %>
-<% end %>
+    <% if current_user == @note.user %>
+    <button type="button" class="btn btn-default">
+      <%= link_to "Edit this note", edit_note_path(@note) %>
+    </button>
+    <button type="button" class="btn btn-default">
+      <%= link_to "Delete this note", note_path(@note), method: :delete %>
+    </button>
+    <% end %>
+
+  </div>
+</div>
