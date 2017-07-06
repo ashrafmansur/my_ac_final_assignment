@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+
+    <div class="well col-md-8">
+      <h1><%= @user.username.downcase %>'s notes</h1>
+
+      <% if @currentfollowers.include?(current_user.id) %>
+      <%= link_to "Unfollow this person!", following_path(id: @user), method: :delete %>
+      <% elsif @user != current_user %>
+      <%= link_to "Follow this person!", followings_path(id: @user), method: :post %>
+      <% end %>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#notes" aria-controls="notes" role="tab" data-toggle="tab">Notes <span class="badge"><%= @user.notes.count %></span></a>
+        </li>
+        <li role="presentation">
+          <a href="#following" aria-controls="following" role="tab" data-toggle="tab">Following</a>
+        </li>
+        <li role="presentation">
+          <a href="#followers" aria-controls="followers" role="tab" data-toggle="tab">Followers</a>
+        </li>
+      </ul>
+      <br>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="notes">
+          <div id="listofnotes">
+            <%= render partial: "listofnotes" %>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="following">
+          <% @user.followings.each do | k | %>
+            <div class="col-md-2" align="center">
+              <%= link_to k.followee, user_path(k.followee.id) %>
+            </div>
+          <% end %>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="followers">
+          <% @user.followers.each do | k | %>
+            <div class="col-md-2" align="center">
+              <%= link_to k.follower, user_path(k.follower.id) %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+      <!--closes ALL tab-contents-->
+    </div>
+    <!--closes well-->
+</div>
+</div><!--closes container-->

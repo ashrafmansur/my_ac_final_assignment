@@ -1,0 +1,3 @@
+<% @notes.each do |note| %>
+<h3><%= link_to "#{note.body}", note_path(note) %></h3>
+<% end %>
